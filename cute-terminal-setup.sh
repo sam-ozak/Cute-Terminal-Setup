@@ -377,11 +377,21 @@ cp "$TMP_DIR/cutefetch" "$HOME/cutefetch/cutefetch"
 chmod +x "$HOME/cutefetch/cutefetch"
 
 # Install dependencies
-echo "📦 Installing required packages..."
-apt update > /dev/null 2>&1 || true
-apt install -y git curl wget unzip fontconfig > /dev/null 2>&1 || \
-dnf install -y git curl wget unzip fontconfig > /dev/null 2>&1 || \
-pacman -Sy --noconfirm git curl wget unzip fontconfig > /dev/null 2>&1
+# Try installing dependencies based on available package manager
+if command -v apt-get > /dev/null 2>&1; then
+    sudo apt update > /dev/null 2>&1
+    sudo apt install -y git curl wget unzip fontconfig > /dev/null 2>&1
+elif command -v dnf > /dev/null 2>&1; then
+    sudo dnf install -y git curl wget unzip fontconfig > /dev/null 2>&1
+elif command -v pacman > /dev/null 2>&1; then
+    sudo pacman -Sy --noconfirm git curl wget unzip fontconfig > /dev/null 2>&1
+elif command -v xbps-install > /dev/null 2>&1; then
+    sudo xbps-install -Sy --noconfirm git curl wget unzip fontconfig > /dev/null 2>&1
+elif command -v zypper > /dev/null 2>&1; then
+    sudo zypper --non-interactive install git curl wget unzip fontconfig > /dev/null 2>&1
+else
+    echo "⚠️ Could not detect package manager. Some features may not work."
+fi
 
 # Set up fonts
 echo "🔤 Installing FiraCode Nerd Font..."
