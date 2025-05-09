@@ -7,7 +7,7 @@
 # Modified by: strafe    (https://github.com/strafe )
 # Modified by: cybardev  (https://github.com/cybardev )
 # And others: https://github.com/cybardev/cutefetch/graphs/contributors   
-# Modified by YOU 💖
+# Modified by FIX
 # ------------------------------------------------------------------- #
 
 readonly VERSION_INFO="v3.0.0"
