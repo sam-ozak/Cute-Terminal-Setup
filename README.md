@@ -40,15 +40,7 @@ When you run the installer:
 
 ### On Any Linux System
 
-```bash
-# Download the script
-curl -LO https://raw.githubusercontent.com/sam-ozak/Cute-Terminal-Setup/main/cute-terminal-setup.sh 
-
-# Make it executable
+git clone https://github.com/sam-ozak/Cute-Terminal-Setup.git 
+cd Cute-Terminal-Setup
 chmod +x cute-terminal-setup.sh
-
-# Run as sudo
 sudo ./cute-terminal-setup.sh
-
-# Restart shell
-exec $SHELL
