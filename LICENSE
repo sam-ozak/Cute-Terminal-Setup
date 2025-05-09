@@ -19,3 +19,17 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
+
+---
+
+## 📄 Step 3: Push Everything to Your Repo
+
+From your local machine:
+
+```bash
+git init
+git add .
+git commit -m "Initial commit with custom cutefetch setup"
+git branch -M main
+git remote add origin https://github.com/YOUR_USERNAME/cute-terminal.git 
+git push -u origin main
