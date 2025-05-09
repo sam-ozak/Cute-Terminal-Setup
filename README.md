@@ -42,7 +42,7 @@ When you run the installer:
 
 ```bash
 # Download the script
-curl -LO https://github.com/YOUR_USERNAME/cute-terminal/raw/main/cute-terminal-setup.sh 
+curl -LO https://raw.githubusercontent.com/sam-ozak/Cute-Terminal-Setup/main/cute-terminal-setup.sh 
 
 # Make it executable
 chmod +x cute-terminal-setup.sh
