@@ -138,23 +138,22 @@ textfetch() {
 
 # ------------------------- Info Collectors ------------------------- #
 
-# set necessary variable and clear the screen
 init() {
     # store colour codes in variables
     for i in {0..7}; do
-        printf -v "c${i}" '%b' "\e[3${i}m" # make following text have this colour
+        printf -v "c${i}" '%b' "\e[3${i}m"
     done
 
-    readonly d=$'\e[1m' # make following text bold
-    readonly t=$'\e[0m' # end previously applied effects (colours, bold, etc.)
-    readonly v=$'\e[7m' # swap text and background colours
+    readonly d=$'\e[1m'
+    readonly t=$'\e[0m'
+    readonly v=$'\e[7m'
 
     # icons for the sysinfo
-    readonly w="♥"     # window manager
-    readonly k=""     # kernel
-    readonly s=""     # shell
-    readonly u="⏱"    # uptime
-    readonly b=""    # battery
+    readonly w="♥"
+    readonly k=""
+    readonly s=""
+    readonly u="⏱"
+    readonly b=""
 
     # system information
     case "\$(uname -s)" in
@@ -166,7 +165,7 @@ init() {
         # Get uptime in short format
         readonly uval="\$(uptime -p | sed 's/up //; s/ minutes/m/g; s/ minute/m/g; s/ hours/h/g; s/ hour/h/g; s/ days/d/g; s/ day/d/g')"
 
-        # Battery info: percentage + remaining time (only if discharging)
+        # Battery info
         if [ -d "/sys/class/power_supply/" ]; then
             BAT=\$(ls /sys/class/power_supply/ | grep -i bat)
             if [ "\$BAT" ]; then
@@ -175,22 +174,18 @@ init() {
 
                 BATTERY_INFO="\$CAPACITY%"
 
-                # Show remaining time only if discharging and not full
                 if [[ "\$STATUS" == "Discharging" && "\$CAPACITY" -lt 100 ]]; then
                     ENERGY=\$(cat /sys/class/power_supply/\$BAT/energy_now)
                     POWER=\$(cat /sys/class/power_supply/\$BAT/power_now)
 
                     if (( POWER > 0 )); then
                         REMAINING_MINUTES=\$(( ENERGY * 60 / POWER / 1000000 ))
-
-                        if (( REMAINING_MINUTES > 0 )); then
-                            HOURS=\$(( REMAINING_MINUTES / 60 ))
-                            MINS=\$(( REMAINING_MINUTES % 60 ))
-                            TIME_STR=""
-                            [[ "\$HOURS" -gt 0 ]] && TIME_STR+="\${HOURS}h "
-                            [[ "\$MINS" -gt 0 ]] && TIME_STR+="\${MINS}m"
-                            BATTERY_INFO+=" (\$TIME_STR)"
-                        fi
+                        HOURS=\$(( REMAINING_MINUTES / 60 ))
+                        MINS=\$(( REMAINING_MINUTES % 60 ))
+                        TIME_STR=""
+                        [[ "\$HOURS" -gt 0 ]] && TIME_STR+="\${HOURS}h "
+                        [[ "\$MINS" -gt 0 ]] && TIME_STR+="\${MINS}m"
+                        BATTERY_INFO+=" (\$TIME_STR)"
                     fi
                 fi
                 readonly bval="\$BATTERY_INFO"
@@ -200,19 +195,17 @@ init() {
         else
             readonly bval=""
         fi
-
         ;;
     Darwin*)
         readonly wm="\$(get_wm_mac)"
         readonly kern="\$(uname) \$(uname -r)"
-        readonly shell="\$(basename "\$SHELL")"
+        readonly shell="\$(basename \"\$SHELL\")"
 
         # Get uptime on macOS
         readonly uval="\$(uptime | awk '{print \$3 \$4}' | sed 's/,//; s/and/ /')"
         
         # Battery not supported here yet
         readonly bval="macOS: N/A"
-
         ;;
     *)
         echo "We do not support \$1 yet."
@@ -221,7 +214,7 @@ init() {
         ;;
     esac
 
-    tput clear # clear terminal screen
+    tput clear
 }
 
 # get the name of window manager (Mac OS)
