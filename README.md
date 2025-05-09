@@ -41,9 +41,7 @@ When you run the installer:
 ### On Any Linux System
 
 git clone https://github.com/sam-ozak/Cute-Terminal-Setup.git 
-
 cd Cute-Terminal-Setup
-
 chmod +x cute-terminal-setup.sh
-
 sudo ./cute-terminal-setup.sh
+exec $SHELL
