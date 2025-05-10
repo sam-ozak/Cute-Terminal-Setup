@@ -13,9 +13,9 @@ fi
 echo "🔧 Installing required dependencies for SolusOS..."
 sudo eopkg install -y git curl wget unzip fontconfig x11-apps > /dev/null 2>&1
 
-# Install Fira Code Nerd Font
+# Install Nerd Font (Fira Code Nerd Font)
 echo "🔤 Installing Fira Code Nerd Font..."
-FONT_DIR="$HOME/.fonts"
+FONT_DIR="$HOME/.local/share/fonts"
 mkdir -p "$FONT_DIR"
 cd "$FONT_DIR"
 wget -q https://github.com/ryanoasis/nerd-fonts/releases/download/v3.2.1/FiraCode.zip
@@ -24,3 +24,16 @@ rm -rf FiraCode.zip FiraCode/*Windows* FiraCode/*macOS*
 fc-cache -fv > /dev/null 2>&1
 
 echo "📌 Please set your terminal font to 'Fira Code Nerd Font' for icons to display properly."
+
+# Link Cutefetch to $HOME/.local/bin
+echo "🔗 Linking Cutefetch to $HOME/.local/bin..."
+ln -sf "$PWD/Cutefetch" "$HOME/.local/bin/cutefetch"
+chmod +x "$PWD/Cutefetch"
+
+# Check for $HOME/.local/bin in PATH
+if ! echo "$PATH" | grep -q "$HOME/.local/bin"; then
+    echo "export PATH=\"\$HOME/.local/bin:\$PATH\"" >> "$HOME/.bashrc"
+    echo "Added $HOME/.local/bin to PATH in .bashrc"
+fi
+
+echo "✅ Setup complete! Reload your shell or run 'exec \$SHELL' to apply changes."
