@@ -27,8 +27,13 @@ echo "📌 Please set your terminal font to 'Fira Code Nerd Font' for icons to d
 
 # Link Cutefetch to $HOME/.local/bin
 echo "🔗 Linking Cutefetch to $HOME/.local/bin..."
+mkdir -p "$HOME/.local/bin"
 ln -sf "$PWD/Cutefetch" "$HOME/.local/bin/cutefetch"
+
+# Fix permissions for Cutefetch
+echo "🔒 Setting executable permissions for Cutefetch..."
 chmod +x "$PWD/Cutefetch"
+chmod +x "$HOME/.local/bin/cutefetch"
 
 # Check for $HOME/.local/bin in PATH
 if ! echo "$PATH" | grep -q "$HOME/.local/bin"; then
