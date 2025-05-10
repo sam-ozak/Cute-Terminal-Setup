@@ -10,7 +10,7 @@
 # Modified by: sam-ozak
 # ------------------------------------------------------------------- #
 
-readonly VERSION_INFO="v3.0.1"
+readonly VERSION_INFO="v3.0.2"
 
 # ---------------------------- Utilities ---------------------------- #
 
@@ -57,8 +57,8 @@ eyes() {
 
 init() {
     # Ensure the required font is installed
-    if ! fc-list | grep -qi "FiraCode Nerd Font"; then
-        echo -e "\e[31m[ERROR] Fira Code Nerd Font not installed. Please install it to display icons correctly.\e[0m"
+    if ! fc-list | grep -qi "Nerd Font"; then
+        echo -e "\e[31m[ERROR] Nerd Font (e.g., Fira Code Nerd Font) not installed. Please install it to display icons correctly.\e[0m"
     fi
 
     # Store color codes in variables
@@ -130,7 +130,4 @@ init() {
     tput clear
 }
 
-# --------------------------- Handle Args --------------------------- #
-# (Unmodified, same as your original)
-
-# The rest of the script remains unchanged...
+# (The rest of the script remains the same...)
