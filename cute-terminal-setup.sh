@@ -38,11 +38,11 @@ fi
 echo "🔁 Cloning the repository from GitHub..."
 git clone "$REPO_URL" "$CUTE_DIR"
 
-chmod +x "$CUTE_DIR/cutefetch"
+chmod +x "$CUTE_DIR/Cutefetch"
 
 # Add to PATH
 mkdir -p "$HOME/.local/bin"
-ln -sf "$CUTE_DIR/cutefetch" "$HOME/.local/bin/cutefetch" > /dev/null 2>&1
+ln -sf "$CUTE_DIR/Cutefetch" "$HOME/.local/bin/cutefetch" > /dev/null 2>&1
 export PATH="$HOME/.local/bin:$PATH"
 
 # Install dependencies based on detected package manager
